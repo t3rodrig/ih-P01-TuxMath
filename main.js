@@ -38,12 +38,13 @@ class Asteroids extends Characters {
         let width = 20;
         let height = 20;
         super(x, y, width, height);
+        
+        this.A = Math.round(Math.random() * 19);
+        this.B = Math.round(Math.random() * 19);
+        this.answer = this.A + this.B;
     }
 
     draw(){
-        this.A = 7;
-        this.B = 3;
-        this.answer = this.A + this.B;
         ctx.font = "50px Arial";
         ctx.fillText(`${this.A} + ${this.B} = ?`, this.x, this.y);
     }
@@ -74,8 +75,20 @@ function isEndOfLine(code){
 document.onkeydown = (event) => {
     if (isValidKey(event.keyCode)){
         console.log(`The press key is: ${event.key}`);
-        while (!isEndOfLine(event.keyCode)){
-            
+        if (!isEndOfLine(event.keyCode)){
+            if (event.keyCode != 8){
+                player.input += event.key;
+            } else {
+                player.input = ""
+            }
+        } else {
+            console.log("input: ",player.input);
+            if (player.input == asteroid.answer){
+                alert("Good job")
+            } else {
+                alert("try again")
+                player.input = ""
+            }
         }
     }
 }
