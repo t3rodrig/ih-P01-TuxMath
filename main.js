@@ -24,12 +24,18 @@ class Characters {
 class Users extends Characters {
     constructor(){
         let x = canvas.width/2;
-        let y = canvas.height * 0.95;
-        let width = 20;
-        let height = 20;
+        let y = canvas.height * 0.80;
+        let width = 168;
+        let height = 110;
         super(x, y, width, height);
         this.life = 3;
         this.input = "";
+        this.imgConsole = new Image();
+        this.imgConsole.src = "./images/tux/console_led.png"; // 168 x 110
+    }
+
+    draw (){
+        ctx.drawImage(this.imgConsole, this.x, this.y, this.width, this.height);
     }
 }
 
@@ -39,7 +45,7 @@ class Asteroids extends Characters {
         let height = 20;
         super(x, y, width, height);
 
-        this.vy = 1;
+        this.vy = 0.5;
         this.A = Math.round(Math.random() * 19);
         this.B = Math.round(Math.random() * 19);
         this.answer = this.A + this.B;
@@ -78,7 +84,7 @@ function isEndOfLine(code){
 }
 
 function generateAsteroids(){
-    if (frames % 250 == 0){
+    if (frames % 350 == 0){
         let x = 40 + Math.floor(Math.random() * (canvas.width - 230));
         let y = 40;
         let asteroid = new Asteroids(x,y);
@@ -103,10 +109,11 @@ function checkCollision(){
 
 function checkInput(){
     asteroidsArr.forEach((asteroid, index) => {
-        console.log("input: ",player.input);
+        // console.log("input: ",player.input);
         if (player.input == asteroid.answer){
             console.log("Good job");
             asteroidsArr.splice(index, 1);
+            player.input = "";
         } else {
             console.log("Try again");
             player.input = "";
@@ -119,9 +126,9 @@ function checkInput(){
 function update(){
     frames += 1;
     ctx.clearRect(0, 0, canvas.width, canvas.height);
-    player.draw();
     generateAsteroids();
     drawAsteroids();
+    player.draw();
     checkCollision();
     // gameOver
 }
