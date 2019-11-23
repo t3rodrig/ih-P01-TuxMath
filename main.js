@@ -34,6 +34,7 @@ class Users extends Characters {
         let width = 20;
         let height = 20;
         super(x, y, width, height);
+        this.life = 3;
         this.input = "";
     }
 }
@@ -54,6 +55,12 @@ class Asteroids extends Characters {
         ctx.font = "40px Arial";
         this.y += this.vy;
         ctx.fillText(`${this.A} + ${this.B} = ?`, this.x, this.y);
+    }
+
+    crashWith(){
+        let floor = canvas.height - 40;
+
+        return (this.y >= floor);
     }
 } 
 
@@ -85,6 +92,15 @@ function drawAsteroids(){
     });
 }
 
+function checkCollition(){
+    asteroidsArr.forEach((item, index)=>{
+        if(item.crashWith()){
+            console.log("A collition");
+            asteroidsArr.splice(index, 1);
+        }
+    });
+}
+
 // FUNCIONES PRINCIPALES
 
 function update(){
@@ -93,7 +109,7 @@ function update(){
     player.draw();
     generateAsteroids();
     drawAsteroids();
-    // checkCollition
+    checkCollition();
     // gameOver
 }
 
