@@ -92,10 +92,10 @@ function drawAsteroids(){
     });
 }
 
-function checkCollition(){
+function checkCollision(){
     asteroidsArr.forEach((item, index)=>{
         if(item.crashWith()){
-            console.log("A collition");
+            console.log("A collision");
             asteroidsArr.splice(index, 1);
         }
     });
@@ -122,7 +122,7 @@ function update(){
     player.draw();
     generateAsteroids();
     drawAsteroids();
-    checkCollition();
+    checkCollision();
     // gameOver
 }
 
