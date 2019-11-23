@@ -3,9 +3,14 @@
 let canvas = document.querySelector("#canvas");
 let ctx = canvas.getContext("2d");
 
-
 canvas.width = 800;
 canvas.height = 600;
+
+let player;
+let asteroidsArr;
+
+let interval;
+let frames;
 
 // CLASES
 
@@ -38,24 +43,21 @@ class Asteroids extends Characters {
         let width = 20;
         let height = 20;
         super(x, y, width, height);
-        
+
+        this.vy = 2;
         this.A = Math.round(Math.random() * 19);
         this.B = Math.round(Math.random() * 19);
         this.answer = this.A + this.B;
     }
 
     draw(){
-        ctx.font = "50px Arial";
+        ctx.font = "40px Arial";
+        this.y += this.vy;
         ctx.fillText(`${this.A} + ${this.B} = ?`, this.x, this.y);
     }
 } 
 
 // INSTANCIAS
-
-let player = new Users();
-player.draw();
-let asteroid = new Asteroids(50,50)
-asteroid.draw();
 
 // FUNCIONES COMPLEMENTARIAS
 
@@ -68,9 +70,46 @@ function isEndOfLine(code){
     return code == 13;
 }
 
+function generateAsteroids(){
+    if (frames % 100 == 0){
+        let x = 40 + Math.floor(Math.random() * (canvas.width - 230));
+        let y = 40;
+        let asteroid = new Asteroids(x,y);
+        asteroidsArr.push(asteroid);
+    }
+}
+
+function drawAsteroids(){
+    asteroidsArr.forEach((item)=>{
+        item.draw();
+    });
+}
+
 // FUNCIONES PRINCIPALES
 
+function update(){
+    frames += 1;
+    ctx.clearRect(0, 0, canvas.width, canvas.height)
+    // draw user
+    player.draw();
+    generateAsteroids();
+    drawAsteroids();
+    // checkCollition
+    // gameOver
+
+}
+
 // EVENTOS
+
+document.getElementById("start-game-button").onclick = () => {
+    ctx.clearRect(0, 0, canvas.width, canvas.height)
+    player = new Users();
+    // asteroid = new Asteroids(50,50)
+    frames = 0;
+    asteroidsArr = []
+    clearInterval(interval)
+    interval = setInterval(update, 1000/60);
+}
 
 document.onkeydown = (event) => {
     if (isValidKey(event.keyCode)){
