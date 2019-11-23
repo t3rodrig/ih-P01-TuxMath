@@ -6,12 +6,6 @@ let ctx = canvas.getContext("2d");
 canvas.width = 800;
 canvas.height = 600;
 
-let player;
-let asteroidsArr;
-
-let interval;
-let frames;
-
 // CLASES
 
 class Characters {
@@ -64,7 +58,13 @@ class Asteroids extends Characters {
     }
 } 
 
-// INSTANCIAS
+// INSTANCIAS e INICIALIZACIONES
+
+let player = new Users();
+let asteroidsArr = [];
+
+let interval;
+let frames = 0;
 
 // FUNCIONES COMPLEMENTARIAS
 
@@ -101,6 +101,19 @@ function checkCollition(){
     });
 }
 
+function checkInput(){
+    asteroidsArr.forEach((asteroid, index) => {
+        console.log("input: ",player.input);
+        if (player.input == asteroid.answer){
+            console.log("Good job");
+            asteroidsArr.splice(index, 1);
+        } else {
+            console.log("Try again");
+            player.input = "";
+        }
+    });
+}
+
 // FUNCIONES PRINCIPALES
 
 function update(){
@@ -116,31 +129,23 @@ function update(){
 // EVENTOS
 
 document.getElementById("start-game-button").onclick = () => {
-    frames = 0;
+    // toggle start -> stop
     ctx.clearRect(0, 0, canvas.width, canvas.height);
-    player = new Users();
-    asteroidsArr = [];
     clearInterval(interval);
     interval = setInterval(update, 1000/60);
 }
 
 document.onkeydown = (event) => {
     if (isValidKey(event.keyCode)){
-        console.log(`The press key is: ${event.key}`);
+        // console.log(`The press key is: ${event.key}`);
         if (!isEndOfLine(event.keyCode)){
-            if (event.keyCode != 8){
+            if (event.keyCode != 8){ // key != "Backspace"
                 player.input += event.key;
             } else {
                 player.input = ""
             }
         } else {
-            console.log("input: ",player.input);
-            if (player.input == asteroid.answer){
-                alert("Good job")
-            } else {
-                alert("try again")
-                player.input = ""
-            }
+            checkInput();
         }
     }
 }
