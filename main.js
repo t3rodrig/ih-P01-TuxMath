@@ -89,25 +89,22 @@ function drawAsteroids(){
 
 function update(){
     frames += 1;
-    ctx.clearRect(0, 0, canvas.width, canvas.height)
-    // draw user
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
     player.draw();
     generateAsteroids();
     drawAsteroids();
     // checkCollition
     // gameOver
-
 }
 
 // EVENTOS
 
 document.getElementById("start-game-button").onclick = () => {
-    ctx.clearRect(0, 0, canvas.width, canvas.height)
-    player = new Users();
-    // asteroid = new Asteroids(50,50)
     frames = 0;
-    asteroidsArr = []
-    clearInterval(interval)
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    player = new Users();
+    asteroidsArr = [];
+    clearInterval(interval);
     interval = setInterval(update, 1000/60);
 }
 
