@@ -75,11 +75,18 @@ let frames = 0;
 // FUNCIONES COMPLEMENTARIAS
 
 function isValidKey(code){
+    `valid keys are: 
+    * numbers (48-57)
+    * enter key (13)
+    * backspace (8)`
+
     return (code >= 48 && code <= 57) ||
            (code == 13) || (code == 8);
 }
 
 function isEndOfLine(code){
+    `Enter key`
+    
     return code == 13;
 }
 
@@ -121,6 +128,10 @@ function checkInput(){
     });
 }
 
+function writeUserInput(){
+
+}
+
 // FUNCIONES PRINCIPALES
 
 function update(){
@@ -148,8 +159,10 @@ document.onkeydown = (event) => {
         if (!isEndOfLine(event.keyCode)){
             if (event.keyCode != 8){ // key != "Backspace"
                 player.input += event.key;
+                // writeUserInput()
             } else {
                 player.input = ""
+                // writeUserInput()
             }
         } else {
             checkInput();
