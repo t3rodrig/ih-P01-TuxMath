@@ -53,6 +53,7 @@ class Asteroids extends Characters {
 
     draw(){
         ctx.font = "40px Arial";
+        ctx.fillStyle = "black";
         this.y += this.vy;
         ctx.fillText(`${this.A} + ${this.B} = ?`, this.x, this.y);
     }
@@ -86,7 +87,7 @@ function isValidKey(code){
 
 function isEndOfLine(code){
     `Enter key`
-    
+
     return code == 13;
 }
 
@@ -128,8 +129,23 @@ function checkInput(){
     });
 }
 
-function writeUserInput(){
+function writeUserInput(user){
+    let string = user.input;
+    let digits = 2;
+    let x = user.x;
+    let y = user.y;
+    let space = 60;
+    let letter;
+    ctx.font = "40px Arial";
+    ctx.fillStyle = "red";
 
+    if (string.length < digits){
+        string = "0".repeat(digits - string.length) + string;
+    } else if(string.length > digits){
+        string = string.slice(-digits, string.length);
+    }
+
+    ctx.fillText(string, x, y);
 }
 
 // FUNCIONES PRINCIPALES
@@ -140,6 +156,7 @@ function update(){
     generateAsteroids();
     drawAsteroids();
     player.draw();
+    writeUserInput(player);
     checkCollision();
     // gameOver
 }
@@ -159,10 +176,8 @@ document.onkeydown = (event) => {
         if (!isEndOfLine(event.keyCode)){
             if (event.keyCode != 8){ // key != "Backspace"
                 player.input += event.key;
-                // writeUserInput()
             } else {
                 player.input = ""
-                // writeUserInput()
             }
         } else {
             checkInput();
