@@ -45,7 +45,7 @@ class Asteroids extends Characters {
         let height = 20;
         super(x, y, width, height);
 
-        this.vy = 0.5;
+        this.vy = 0.25;
         this.A = Math.round(Math.random() * 19);
         this.B = Math.round(Math.random() * 19);
         this.answer = this.A + this.B;
@@ -92,7 +92,7 @@ function isEndOfLine(code){
 }
 
 function generateAsteroids(){
-    if (frames % 350 == 0){
+    if (frames % 650 == 0){
         let x = 40 + Math.floor(Math.random() * (canvas.width - 230));
         let y = 40;
         let asteroid = new Asteroids(x,y);
