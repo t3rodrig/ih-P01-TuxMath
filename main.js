@@ -23,7 +23,7 @@ class Characters {
 
 class Users extends Characters {
     constructor(){
-        let x = canvas.width/2;
+        let x = canvas.width/2 - 80;
         let y = canvas.height * 0.80;
         let width = 168;
         let height = 110;
@@ -140,8 +140,8 @@ function checkInput(){
 function writeUserInput(user){
     let string = user.input;
     let digits = 2;
-    let x = user.x;
-    let y = user.y;
+    let x = user.x + 60;
+    let y = user.y + 40;
     let space = 60;
     let letter;
     ctx.font = "40px Arial";
