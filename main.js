@@ -151,7 +151,6 @@ function writeUserInput(user){
 // FUNCIONES PRINCIPALES
 
 function update(){
-    frames += 1;
     ctx.clearRect(0, 0, canvas.width, canvas.height);
     generateAsteroids();
     drawAsteroids();
@@ -159,6 +158,7 @@ function update(){
     writeUserInput(player);
     checkCollision();
     // gameOver
+    frames += 1;
 }
 
 // EVENTOS
