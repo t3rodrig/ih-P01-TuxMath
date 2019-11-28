@@ -52,8 +52,8 @@ class Characters {
 
 class Users extends Characters {
     constructor(){
-        let x = canvas.width/2 - 80;
-        let y = canvas.height * 0.80;
+        let x = 320;
+        let y = 480;
         let width = 168;
         let height = 110;
         super(x, y, width, height);
@@ -61,10 +61,13 @@ class Users extends Characters {
         this.input = "";
         this.imgConsole = new Image();
         this.imgConsole.src = "./images/tux/console_led.png"; // 168 x 110
+        this.imgTux = new Image();
+        this.imgTux.src = "./images/tux/tux-console1.png"; // 77 x 60
     }
 
     draw (){
         ctx.drawImage(this.imgConsole, this.x, this.y, this.width, this.height);
+        ctx.drawImage(this.imgTux, 370, 540, 77, 60);
     }
 }
 
