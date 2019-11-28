@@ -6,6 +6,35 @@ let ctx = canvas.getContext("2d");
 canvas.width = 800;
 canvas.height = 600;
 
+let txt = `"TuxMath" is an educational game starring
+Tux. Tux must defend his city by solving 
+math problems.
+
+Use the number keys on the keyboard to 
+answer math equations, and then hit enter.
+
+If you don't answer a comet's math equation 
+before it crashes, Tux loses a heart.
+
+When you lose all of your hearts, 
+the game ends.`
+
+ctx.font = '30px Courier';
+let xPos = 20;
+let yPos = 50;
+let lineheight = 35;
+let lines = txt.split('\n');
+
+for (let i = 0; i<lines.length; i++)
+    ctx.fillText(lines[i], xPos, yPos + (i*lineheight) );
+
+let tuxImg = new Image()
+tuxImg.src = "./images/tux/bigtux0.png"
+
+tuxImg.onload = () => ctx.drawImage(tuxImg, 
+    650, 
+    460,
+    110, 140);
 // CLASES
 
 class Characters {
@@ -142,8 +171,6 @@ function writeUserInput(user){
     let digits = 2;
     let x = user.x + 60;
     let y = user.y + 40;
-    let space = 60;
-    let letter;
     ctx.font = "40px Arial";
     ctx.fillStyle = "red";
 
