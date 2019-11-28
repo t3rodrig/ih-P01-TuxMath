@@ -41,21 +41,29 @@ class Users extends Characters {
 
 class Asteroids extends Characters {
     constructor(x,y){
-        let width = 20;
-        let height = 20;
+        let width = 83*3/5;
+        let height = 149*3/5;
         super(x, y, width, height);
 
         this.vy = 0.25;
         this.A = Math.round(Math.random() * 19);
         this.B = Math.round(Math.random() * 19);
         this.answer = this.A + this.B;
+        this.img = new Image();
+        this.img.src = "./images/comets/comet0.png";
     }
 
     draw(){
         ctx.font = "40px Arial";
         ctx.fillStyle = "black";
         this.y += this.vy;
+
+        let idx = frames % 3;
+        this.img.src = "./images/comets/comet"+ idx +".png";
+        ctx.drawImage(this.img, this.x + 140, this.y - 90, this.width, this.height);
+
         ctx.fillText(`${this.A} + ${this.B} = ?`, this.x, this.y);
+
     }
 
     crashWith(){
