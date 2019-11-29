@@ -3,15 +3,22 @@ body {
     margin: 0;
 }
 
-#start-game-button {
+.btn {
     border: 0;
-    box-shadow: 0;
-    background: linear-gradient(to bottom, #9DA400, #BAC600);
+    border-radius: 5px;
     color: #fff;
+    cursor: pointer;
     padding: 20px 40px;
     font-size: 30px;
-    border-radius: 5px;
   }
+
+.btn.start {
+    background: #5fca5f;
+}
+
+.btn.reset {
+    background: #f14949;
+}
 
 #canvas {
     text-align: center;

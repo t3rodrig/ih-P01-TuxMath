@@ -3,6 +3,8 @@
 let canvas = document.querySelector("#canvas");
 let ctx = canvas.getContext("2d");
 
+let gameBtn = document.getElementById("game-button");
+
 canvas.width = 800;
 canvas.height = 600;
 
@@ -35,6 +37,9 @@ tuxImg.onload = () => ctx.drawImage(tuxImg,
     650, 
     460,
     110, 140);
+
+// window.location.reload(true);
+
 // CLASES
 
 class Characters {
@@ -90,8 +95,10 @@ class Asteroids extends Characters {
         ctx.fillStyle = "black";
         this.y += this.vy;
 
-        let idx = frames % 3;
-        this.img.src = "./images/comets/comet"+ idx +".png";
+        if (frames % 7 == 0){
+            let idx = frames % 3;
+            this.img.src = "./images/comets/comet"+ idx +".png";
+        }
         ctx.drawImage(this.img, this.x + 140, this.y - 90, this.width, this.height);
 
         ctx.fillText(`${this.A} + ${this.B} = ?`, this.x, this.y);
@@ -186,6 +193,11 @@ function writeUserInput(user){
     ctx.fillText(string, x, y);
 }
 
+function setResetBtn() {
+    gameBtn.innerHTML = 'RESET';
+    gameBtn.className = 'btn reset';
+  }
+
 // FUNCIONES PRINCIPALES
 
 function update(){
@@ -201,12 +213,18 @@ function update(){
 
 // EVENTOS
 
-document.getElementById("start-game-button").onclick = () => {
-    // toggle start -> stop
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
-    clearInterval(interval);
-    interval = setInterval(update, 1000/60);
-}
+// Start/Reset Button
+gameBtn.addEventListener('click', function (e) {  
+    if (e.currentTarget.className == 'btn start'){
+        setResetBtn();
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        clearInterval(interval);
+        interval = setInterval(update, 1000/60);
+    }
+    else {
+        window.location.reload(true);
+    }
+});
 
 document.onkeydown = (event) => {
     if (isValidKey(event.keyCode)){
