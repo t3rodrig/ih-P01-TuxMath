@@ -23,4 +23,7 @@ body {
 #canvas {
     text-align: center;
     border: 2px solid black;
+    background-image: url("../images/backgrounds/1.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
 }

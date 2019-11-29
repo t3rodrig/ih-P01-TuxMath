@@ -22,6 +22,8 @@ When you lose all of your hearts,
 the game ends.`
 
 ctx.font = '30px Courier';
+ctx.fillStyle = "white";
+
 let xPos = 20;
 let yPos = 50;
 let lineheight = 35;
@@ -92,7 +94,7 @@ class Asteroids extends Characters {
 
     draw(){
         ctx.font = "40px Arial";
-        ctx.fillStyle = "black";
+        ctx.fillStyle = "white";
         this.y += this.vy;
 
         if (frames % 7 == 0){
