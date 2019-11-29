@@ -4,6 +4,7 @@ let canvas = document.querySelector("#canvas");
 let ctx = canvas.getContext("2d");
 
 let gameBtn = document.getElementById("game-button");
+let music = document.getElementById("music");
 
 canvas.width = 800;
 canvas.height = 600;
@@ -218,6 +219,7 @@ function update(){
 // Start/Reset Button
 gameBtn.addEventListener('click', function (e) {  
     if (e.currentTarget.className == 'btn start'){
+        music.play();
         setResetBtn();
         ctx.clearRect(0, 0, canvas.width, canvas.height);
         clearInterval(interval);
