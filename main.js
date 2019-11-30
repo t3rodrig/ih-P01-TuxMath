@@ -74,11 +74,19 @@ class Users extends Characters {
         this.imgConsole.src = "./images/tux/console_led.png"; // 168 x 110
         this.imgTux = new Image();
         this.imgTux.src = "./images/tux/tux-console1.png"; // 77 x 60
+
+        this.hearts = 5;
+        this.imgHeart = new Image();
+        this.imgHeart.src = "./images/heart.png";
     }
 
     draw (){
         ctx.drawImage(this.imgConsole, this.x, this.y, this.width, this.height);
         ctx.drawImage(this.imgTux, 370, 540, 77, 60);
+
+        for (let i = 0; i < this.hearts; i++){
+            ctx.drawImage(this.imgHeart, 30 + i*55, 15, 45, 38);
+        }
     }
 }
 
