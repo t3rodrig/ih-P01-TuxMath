@@ -178,6 +178,12 @@ function checkCollision(user){
     });
 }
 
+function checkGame(user){
+    if (user.hearts == 0){
+        clearInterval(interval);
+    }
+}
+
 function checkInput(){
     asteroidsArr.forEach((asteroid, index) => {
         // console.log("input: ",player.input);
@@ -225,7 +231,7 @@ function update(){
     player.draw();
     writeUserInput(player);
     checkCollision(player);
-    // gameOver
+    checkGame(player);
     frames += 1;
 }
 
