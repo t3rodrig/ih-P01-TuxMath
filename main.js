@@ -5,6 +5,9 @@ let ctx = canvas.getContext("2d");
 
 let gameBtn = document.getElementById("game-button");
 let music = document.getElementById("music");
+let cheer = document.getElementById("cheer");
+let buzz = document.getElementById("buzz");
+let explosion = document.getElementById("explosion");
 
 canvas.width = 800;
 canvas.height = 600;
@@ -159,7 +162,8 @@ function drawAsteroids(){
 function checkCollision(){
     asteroidsArr.forEach((item, index)=>{
         if(item.crashWith()){
-            console.log("A collision");
+            // console.log("A collision");
+            explosion.play();
             asteroidsArr.splice(index, 1);
         }
     });
@@ -169,11 +173,13 @@ function checkInput(){
     asteroidsArr.forEach((asteroid, index) => {
         // console.log("input: ",player.input);
         if (player.input == asteroid.answer){
-            console.log("Good job");
+            // console.log("Good job");
+            cheer.play();
             asteroidsArr.splice(index, 1);
             player.input = "";
         } else {
-            console.log("Try again");
+            // console.log("Try again");
+            buzz.play();
             player.input = "";
         }
     });
