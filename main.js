@@ -48,6 +48,9 @@ tuxImg.onload = () => ctx.drawImage(tuxImg,
 let imgGameOver = new Image ();
 imgGameOver.src = "./images/gameover.png";
 
+let imgYouWin = new Image ();
+imgYouWin.src = "./images/youwin.png";
+
 
 // window.location.reload(true);
 
@@ -101,7 +104,7 @@ class Asteroids extends Characters {
         let height = 149*3/5;
         super(x, y, width, height);
 
-        this.vy = 0.25;
+        this.vy = 0.35;
         this.A = Math.round(Math.random() * 19);
         this.B = Math.round(Math.random() * 19);
         this.answer = this.A + this.B;
@@ -135,6 +138,7 @@ class Asteroids extends Characters {
 
 let player = new Users();
 let asteroidsArr = [];
+let numberOfAsteroids = 5;
 
 let interval;
 let frames = 0;
@@ -188,6 +192,10 @@ function checkGame(user){
         ctx.drawImage(imgGameOver, 300, 300, 285, 120);
         music.pause();
         setTimeout(function(){clearInterval(interval)}, 500);
+    } else if (numberOfAsteroids == 0){
+        ctx.drawImage(imgYouWin, 300, 300, 285, 120);
+        music.pause();
+        setTimeout(function(){clearInterval(interval)}, 500);
     }
 }
 
@@ -199,6 +207,7 @@ function checkInput(){
             cheer.play();
             asteroidsArr.splice(index, 1);
             player.input = "";
+            numberOfAsteroids -= 1;
         } else {
             // console.log("Try again");
             buzz.play();
