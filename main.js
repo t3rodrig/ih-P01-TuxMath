@@ -44,6 +44,11 @@ tuxImg.onload = () => ctx.drawImage(tuxImg,
     460,
     110, 140);
 
+
+let imgGameOver = new Image ();
+imgGameOver.src = "./images/gameover.png";
+
+
 // window.location.reload(true);
 
 // CLASES
@@ -75,7 +80,7 @@ class Users extends Characters {
         this.imgTux = new Image();
         this.imgTux.src = "./images/tux/tux-console1.png"; // 77 x 60
 
-        this.hearts = 5;
+        this.hearts = 3;
         this.imgHeart = new Image();
         this.imgHeart.src = "./images/heart.png";
     }
@@ -180,7 +185,9 @@ function checkCollision(user){
 
 function checkGame(user){
     if (user.hearts == 0){
-        clearInterval(interval);
+        ctx.drawImage(imgGameOver, 300, 300, 285, 120);
+        music.pause();
+        setTimeout(function(){clearInterval(interval)}, 500);
     }
 }
 
