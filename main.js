@@ -167,12 +167,13 @@ function drawAsteroids(){
     });
 }
 
-function checkCollision(){
+function checkCollision(user){
     asteroidsArr.forEach((item, index)=>{
         if(item.crashWith()){
             // console.log("A collision");
             explosion.play();
             asteroidsArr.splice(index, 1);
+            user.hearts -= 1;
         }
     });
 }
@@ -223,7 +224,7 @@ function update(){
     drawAsteroids();
     player.draw();
     writeUserInput(player);
-    checkCollision();
+    checkCollision(player);
     // gameOver
     frames += 1;
 }
